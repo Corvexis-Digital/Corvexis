@@ -43,6 +43,22 @@ export default function Services() {
             desc: 'Custom-built interactive experiences, gaming engines, and educational platforms.',
             features: ['Game Development', 'Educational Software', 'Interactive Simulators', 'Gamification Strategy'],
             color: '#f59e0b'
+        },
+        {
+            id: 'ai-automation',
+            icon: Zap,
+            title: 'AI & Automation Engineering',
+            desc: 'Leveraging cutting-edge AI models to automate workflows and build intelligent systems.',
+            features: ['Custom LLM Integration', 'Workflow Automation', 'Data Analysis AI', 'Predictive Modeling'],
+            color: '#06b6d4'
+        },
+        {
+            id: 'enterprise',
+            icon: Globe,
+            title: 'Enterprise Architecture',
+            desc: 'Scalable cloud infrastructure and robust backend systems for global operations.',
+            features: ['Cloud Migration', 'Microservices Architecture', 'Cybersecurity Audits', 'High-Availability Systems'],
+            color: '#8b5cf6'
         }
     ]
 

@@ -34,9 +34,9 @@ export default function Home() {
             delay: 0.3
         },
         {
-            icon: Laptop,
-            title: "Hardware Upgrade",
-            description: "Professional software and hardware replacement/repair for PCs and Laptops.",
+            icon: Zap,
+            title: "AI & Automation",
+            description: "Intelligent systems and workflow automation powered by advanced neural networks.",
             delay: 0.4
         },
         {
@@ -44,15 +44,57 @@ export default function Home() {
             title: "Interactive & EdTech",
             description: "Custom-built interactive experiences, gaming engines, and educational platforms.",
             delay: 0.5
+        },
+        {
+            icon: Laptop,
+            title: "Precision Hardware",
+            description: "Expert level software and hardware replacement for high-performance computing.",
+            delay: 0.6
+        },
+        {
+            icon: Globe,
+            title: "Enterprise Architecture",
+            description: "Scalable cloud infrastructure and robust backend systems joined for global reach.",
+            delay: 0.7
         }
     ]
 
-    const projectImages = [
-        "/portfolio/project1.jpg",
-        "/portfolio/project2.jpg",
-        "/portfolio/project3.jpg",
-        "/portfolio/project4.png",
-        "/portfolio/project5.png"
+    const projects = [
+        {
+            image: "/portfolio/project-studybuddy.png",
+            title: "Study Buddy AI",
+            description: "AI-Driven Educational Platform"
+        },
+        {
+            image: "/portfolio/project-wordquest.png",
+            title: "Word Quest",
+            description: "Gamified Language Learning"
+        },
+        {
+            image: "/portfolio/project-fluffyjump.png",
+            title: "Fluffy Jump",
+            description: "Physics-Based Mobile Gaming"
+        },
+        {
+            image: "/portfolio/project-neonsnake.png",
+            title: "Neon Snake",
+            description: "Futuristic Arcade Experience"
+        },
+        {
+            image: "/portfolio/project-govjobs.png",
+            title: "GovJobs Aggregator",
+            description: "Enterprise Data Processing"
+        },
+        {
+            image: "/portfolio/project-medibook.png",
+            title: "Medibook",
+            description: "Healthcare Appointment Ecosystem"
+        },
+        {
+            image: "/portfolio/project-acadamate.png",
+            title: "Acadamate",
+            description: "Academic Performance Laboratory"
+        }
     ]
 
     return (
@@ -178,7 +220,7 @@ export default function Home() {
                             <TechAnimation type="globe" size={120} />
                         </div>
                     </div>
-                    <ThreeDImageGallery images={projectImages} />
+                    <ThreeDImageGallery projects={projects} />
                 </div>
             </section>
 
@@ -194,6 +236,6 @@ export default function Home() {
                     <ContactForm />
                 </div>
             </section>
-        </motion.div>
+        </motion.div >
     )
 }

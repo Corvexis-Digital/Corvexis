@@ -27,7 +27,7 @@ export default function AppHub() {
             description: 'Master grammar through an immersive 3D board game journey.',
             icon: Brain,
             color: '#ec4899',
-            locked: true
+            locked: false
         },
         {
             id: 'study-buddy',
@@ -35,6 +35,22 @@ export default function AppHub() {
             description: 'A comprehensive educational platform for collaborative learning.',
             icon: Globe,
             color: '#10b981',
+            locked: false
+        },
+        {
+            id: 'acadamate',
+            name: 'Acadamate',
+            description: 'Elite academic management and AI-driven study laboratory.',
+            icon: Brain,
+            color: '#8b5cf6',
+            locked: false
+        },
+        {
+            id: 'medibook',
+            name: 'Medibook',
+            description: 'Professional healthcare appointment and wellness ecosystem.',
+            icon: Monitor,
+            color: '#06b6d4',
             locked: true
         }
     ]
@@ -87,7 +103,14 @@ export default function AppHub() {
 
                         <div style={{ width: '100px', height: '100px', marginBottom: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <TechAnimation
-                                type={app.id === 'fluffy-jump' ? 'rocket' : app.id === 'snake-game' ? 'zap' : app.id === 'study-buddy' ? 'globe' : 'cpu'}
+                                type={
+                                    app.id === 'fluffy-jump' ? 'rocket' :
+                                        app.id === 'snake-game' ? 'zap' :
+                                            app.id === 'study-buddy' ? 'globe' :
+                                                app.id === 'word-quest' ? 'brain' :
+                                                    app.id === 'acadamate' ? 'palette' :
+                                                        app.id === 'medibook' ? 'monitor' : 'cpu'
+                                }
                                 color={app.locked ? '#475569' : app.color}
                                 size={80}
                             />
@@ -104,7 +127,7 @@ export default function AppHub() {
                                 color: app.locked ? app.color : 'white',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyCenter: 'center',
+                                justifyContent: 'center',
                                 gap: '0.5rem'
                             }}
                             onClick={() => {
@@ -142,27 +165,7 @@ export default function AppHub() {
                         overflow: 'hidden'
                     }}
                 >
-                    {/* Orientation Warning */}
-                    <div className="landscape-warning" style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: 10001,
-                        background: 'var(--bg-dark)',
-                        display: 'none',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--text-primary)',
-                        textAlign: 'center',
-                        padding: '2rem'
-                    }}>
-                        <TechAnimation type="zap" size={100} />
-                        <h2 style={{ marginTop: '2rem' }}>Please rotate your device</h2>
-                        <p style={{ color: 'var(--text-secondary)' }}>This application is best experienced in landscape mode.</p>
-                    </div>
+
 
                     <div style={{
                         display: 'flex',
