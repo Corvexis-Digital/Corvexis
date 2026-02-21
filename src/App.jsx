@@ -30,15 +30,21 @@ function App() {
 
         <AnimatedRoutes />
 
-        <footer style={{ padding: '6rem 2rem', textAlign: 'center', borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)', marginTop: 'auto' }}>
-          <div className="content-wrapper" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ fontSize: '3rem', fontWeight: 'bold', fontFamily: 'Outfit', color: 'var(--text-primary)' }}>
+        <footer style={{ padding: '4rem 2rem', textAlign: 'center', borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)', marginTop: 'auto' }}>
+          <div className="content-wrapper" style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '2rem'
+          }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'Outfit', color: 'var(--text-primary)' }}>
               CORVEXIS <span style={{ color: 'var(--neon-cyan)' }}>DIGITAL</span>
             </div>
-            <p style={{ color: 'var(--text-secondary)' }}>&copy; 2026 Corvexis Digital. ALL SYSTEMS OPERATIONAL.</p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>&copy; 2026 Corvexis Digital. ALL SYSTEMS OPERATIONAL.</p>
             <div style={{ display: 'flex', gap: '2rem' }}>
-              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Privacy</a>
-              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Terms</a>
+              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy</a>
+              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms</a>
             </div>
           </div>
         </footer>

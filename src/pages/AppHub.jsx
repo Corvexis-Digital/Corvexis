@@ -196,7 +196,7 @@ export default function AppHub() {
 
                     <div style={{ flex: 1, position: 'relative' }}>
                         <iframe
-                            src={`/${activeApp}/index.html`}
+                            src={`./${activeApp}/index.html`}
                             style={{ width: '100%', height: '100%', border: 'none' }}
                             title={activeApp}
                         />

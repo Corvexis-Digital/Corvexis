@@ -103,8 +103,8 @@ export default function Home() {
             </div>
 
             {/* Hero Section */}
-            <section id="hero" style={{ width: '100vw', padding: 0, margin: 0, overflow: 'hidden' }}>
-                <div style={{ width: '100%', minHeight: '100vh', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', alignItems: 'center', gap: '4rem', padding: '0 4rem' }}>
+            <section id="hero" style={{ padding: 0, margin: 0, overflow: 'hidden' }}>
+                <div className="hero-grid">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -112,10 +112,10 @@ export default function Home() {
                         transition={{ duration: 1, ease: "easeOut" }}
                     >
                         <h1 style={{ marginBottom: '1.5rem', lineHeight: 1 }}>Revolutionizing <br />Digital <span style={{ color: 'var(--neon-purple)' }}>Excellence</span></h1>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '600px', lineHeight: '1.8' }}>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(1rem, 2vw, 1.25rem)', maxWidth: '600px', lineHeight: '1.8' }}>
                             At Corvexis Digital, we merge futuristic technology with artistic vision to create immersive digital experiences that redefine industry standards.
                         </p>
-                        <div style={{ marginTop: '3.5rem', display: 'flex', gap: '1.5rem' }}>
+                        <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'inherit' }}>
                             <button onClick={() => navigate('/services')}>Explore Services</button>
                             <button onClick={() => navigate('/hub')} style={{ borderColor: 'var(--neon-purple)', color: 'var(--neon-purple)' }}>App Hub</button>
                         </div>
@@ -126,9 +126,9 @@ export default function Home() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, delay: 0.2 }}
-                        style={{ width: '100%', maxWidth: '400px', display: 'flex', justifyContent: 'center' }}
+                        style={{ display: 'flex', justifyContent: 'center' }}
                     >
-                        <div className="glass hero-lottie-container" style={{ padding: '3rem', borderRadius: '50%', border: '1px solid var(--neon-cyan)', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className="glass hero-lottie-container">
                             <TechAnimation type="rocket" size={180} />
                         </div>
                     </motion.div>
@@ -144,7 +144,7 @@ export default function Home() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             style={{
-                                fontSize: '4rem',
+                                fontSize: 'clamp(2.5rem, 8vw, 4rem)',
                                 marginBottom: '1.5rem',
                                 textShadow: '0 0 20px rgba(34, 211, 238, 0.3)'
                             }}
@@ -169,12 +169,12 @@ export default function Home() {
 
             <section id="portfolio" style={{ overflow: 'hidden' }}>
                 <div className="content-wrapper">
-                    <div style={{ marginBottom: '4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div className="portfolio-header">
                         <div>
-                            <h2 style={{ fontSize: '3.5rem' }}>Visual <span style={{ color: 'var(--neon-purple)' }}>Innovations</span></h2>
+                            <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)' }}>Visual <span style={{ color: 'var(--neon-purple)' }}>Innovations</span></h2>
                             <p style={{ color: 'var(--text-secondary)' }}>A glimpse into our future-ready solutions.</p>
                         </div>
-                        <div style={{ width: '150px', display: 'flex', justifyContent: 'center' }}>
+                        <div style={{ width: '120px', display: 'flex', justifyContent: 'center' }}>
                             <TechAnimation type="globe" size={120} />
                         </div>
                     </div>
@@ -187,7 +187,7 @@ export default function Home() {
             <section id="contact" style={{ background: 'var(--bg-accent)' }}>
                 <div className="content-wrapper">
                     <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-                        <h2 style={{ fontSize: '4rem' }}>Initiate <span style={{ color: 'var(--neon-cyan)' }}>Contact</span></h2>
+                        <h2 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)' }}>Initiate <span style={{ color: 'var(--neon-cyan)' }}>Contact</span></h2>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginTop: '1rem' }}>Interested in working together? Launch your project here.</p>
                     </div>
 
