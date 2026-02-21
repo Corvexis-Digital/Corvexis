@@ -14,12 +14,18 @@ export default function ContactForm() {
                 border: '1px solid var(--glass-border)'
             }}
         >
-            <form style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', textAlign: 'left' }}>
+            <form
+                action="https://formspree.io/f/mgolnaov"
+                method="POST"
+                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', textAlign: 'left' }}
+            >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--neon-cyan)' }}>Name</label>
                     <input
                         type="text"
+                        name="name"
                         placeholder="Identity"
+                        required
                         style={{
                             padding: '1rem',
                             background: 'rgba(255, 255, 255, 0.05)',
@@ -34,7 +40,9 @@ export default function ContactForm() {
                     <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--neon-cyan)' }}>Email</label>
                     <input
                         type="email"
+                        name="email"
                         placeholder="Frequency"
+                        required
                         style={{
                             padding: '1rem',
                             background: 'rgba(255, 255, 255, 0.05)',
@@ -48,8 +56,10 @@ export default function ContactForm() {
                 <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--neon-cyan)' }}>Project Brief</label>
                     <textarea
+                        name="message"
                         rows="4"
                         placeholder="Vision Details..."
+                        required
                         style={{
                             padding: '1rem',
                             background: 'rgba(255, 255, 255, 0.05)',
