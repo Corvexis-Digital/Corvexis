@@ -1,24 +1,37 @@
-import { useRef, useState, useMemo, Suspense } from 'react'
+import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { PerspectiveCamera, Image as R3FImage, Text, Float, Environment, ContactShadows, useScroll as useR3FScroll, ScrollControls } from '@react-three/drei'
+import { PerspectiveCamera, Image as R3FImage, Text, Environment } from '@react-three/drei'
 import * as THREE from 'three'
 import { motion, useScroll, useTransform } from 'framer-motion'
+
+// Get the correct base URL for assets (handles GitHub Pages /Corvexis/ prefix)
+const BASE_URL = import.meta.env.BASE_URL
+
+function resolveImage(path) {
+    // path is like "/portfolio/project-studybuddy.png"
+    // BASE_URL is "/" locally, "/Corvexis/" on GitHub Pages
+    const clean = path.startsWith('/') ? path.slice(1) : path
+    const base = BASE_URL.endsWith('/') ? BASE_URL : BASE_URL + '/'
+    return base + clean
+}
 
 function ProjectCard({ project, index, total, radius }) {
     const mesh = useRef()
     const [hovered, setHovered] = useState(false)
+    const [imgError, setImgError] = useState(false)
 
-    // Calculate position on the cylinder - placed on the INNER surface
-    // To be "inside", we face the center
     const theta = (index / total) * Math.PI * 2
     const x = Math.sin(theta) * radius
     const z = Math.cos(theta) * radius
+
+    const imageUrl = resolveImage(project.image)
 
     useFrame((state) => {
         if (!mesh.current) return
         const time = state.clock.getElapsedTime()
         mesh.current.position.y = Math.sin(time + index) * 0.05
-        mesh.current.scale.lerp(new THREE.Vector3(hovered ? 1.05 : 1, hovered ? 1.05 : 1, 1), 0.1)
+        const s = hovered ? 1.05 : 1
+        mesh.current.scale.lerp(new THREE.Vector3(s, s, 1), 0.1)
     })
 
     return (
@@ -31,24 +44,47 @@ function ProjectCard({ project, index, total, radius }) {
                 <planeGeometry args={[4, 2.5]} />
                 <meshBasicMaterial transparent opacity={0} />
 
-                <R3FImage
-                    url={project.image}
-                    scale={[3.8, 2.3]}
-                    side={THREE.DoubleSide}
-                    transparent
-                    opacity={hovered ? 1 : 0.8}
-                />
+                {!imgError && (
+                    <R3FImage
+                        url={imageUrl}
+                        scale={[3.8, 2.3]}
+                        side={THREE.DoubleSide}
+                        transparent
+                        opacity={hovered ? 1 : 0.85}
+                        onError={() => setImgError(true)}
+                    />
+                )}
+
+                {/* Fallback: colored panel if image fails */}
+                {imgError && (
+                    <mesh>
+                        <planeGeometry args={[3.8, 2.3]} />
+                        <meshBasicMaterial color="#1e293b" transparent opacity={0.8} />
+                    </mesh>
+                )}
 
                 <Text
-                    position={[0, -1.6, 0.1]}
-                    fontSize={0.25}
-                    color={hovered ? "#06b6d4" : "white"}
+                    position={[0, -1.5, 0.01]}
+                    fontSize={0.22}
+                    color={hovered ? '#06b6d4' : 'white'}
                     anchorX="center"
                     anchorY="middle"
-                    outlineWidth={0.02}
+                    outlineWidth={0.015}
                     outlineColor="#000"
+                    maxWidth={3.5}
                 >
                     {project.title}
+                </Text>
+
+                <Text
+                    position={[0, -1.85, 0.01]}
+                    fontSize={0.14}
+                    color="rgba(255,255,255,0.6)"
+                    anchorX="center"
+                    anchorY="middle"
+                    maxWidth={3.5}
+                >
+                    {project.description}
                 </Text>
             </mesh>
         </group>
@@ -58,14 +94,11 @@ function ProjectCard({ project, index, total, radius }) {
 function TubeScene({ projects }) {
     const group = useRef()
     const { scrollYProgress } = useScroll()
-
-    // Smooth rotation based on page scroll
     const rotationY = useTransform(scrollYProgress, [0, 1], [0, Math.PI * 6])
 
     useFrame((state) => {
         if (group.current) {
-            // Combine scroll rotation with slow auto-spin
-            group.current.rotation.y = rotationY.get() + state.clock.getElapsedTime() * 0.1
+            group.current.rotation.y = rotationY.get() + state.clock.getElapsedTime() * 0.08
         }
     })
 
@@ -81,13 +114,13 @@ function TubeScene({ projects }) {
                 />
             ))}
 
-            {/* The Tube Shell - Semitransparent Architectural Frame */}
+            {/* Tube Shell */}
             <mesh rotation={[Math.PI / 2, 0, 0]}>
                 <cylinderGeometry args={[7.2, 7.2, 15, 64, 1, true]} />
                 <meshStandardMaterial
                     color="#06b6d4"
                     transparent
-                    opacity={0.05}
+                    opacity={0.04}
                     side={THREE.DoubleSide}
                     wireframe
                 />
@@ -118,10 +151,12 @@ export default function ThreeDImageGallery({ projects }) {
             border: '1px solid var(--glass-border)'
         }}>
             <Canvas
-                gl={{ antialias: true, alpha: true }}
-                dpr={[1, 2]}
+                gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+                dpr={[1, 1.5]}
+                onCreated={({ gl }) => {
+                    gl.setClearColor(0x000000, 0)
+                }}
             >
-                {/* Position camera inside/at edge of tube looking through */}
                 <PerspectiveCamera makeDefault position={[0, 0, 0.1]} fov={75} />
 
                 <Suspense fallback={null}>
@@ -142,7 +177,8 @@ export default function ThreeDImageGallery({ projects }) {
                 padding: '1rem',
                 borderLeft: '2px solid var(--neon-cyan)',
                 background: 'rgba(0,0,0,0.3)',
-                backdropFilter: 'blur(5px)'
+                backdropFilter: 'blur(5px)',
+                pointerEvents: 'none'
             }}>
                 <span style={{ fontSize: '0.7rem', color: 'var(--neon-cyan)', display: 'block', marginBottom: '0.5rem' }}>SYSTEM STATUS</span>
                 <span style={{ fontSize: '1.2rem', color: '#fff', fontWeight: 'bold', letterSpacing: '2px' }}>CORE PORTFOLIO PIPELINE</span>
@@ -152,7 +188,8 @@ export default function ThreeDImageGallery({ projects }) {
                 position: 'absolute',
                 bottom: '2rem',
                 right: '2rem',
-                textAlign: 'right'
+                textAlign: 'right',
+                pointerEvents: 'none'
             }}>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontStyle: 'italic' }}>
                     Scrolling through the digital core...
