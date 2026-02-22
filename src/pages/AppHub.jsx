@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import TechAnimation from '../components/TechAnimation'
-import { Rocket, Gamepad2, Brain, Play, Zap, Monitor, Globe, Lock } from 'lucide-react'
+import { Rocket, Gamepad2, Brain, Play, Zap, Monitor, Globe, Lock, Briefcase } from 'lucide-react'
 import { useState } from 'react'
 
 export default function AppHub() {
@@ -51,6 +51,14 @@ export default function AppHub() {
             description: 'Professional healthcare appointment and wellness ecosystem.',
             icon: Monitor,
             color: '#06b6d4',
+            locked: true
+        },
+        {
+            id: 'govjobs',
+            name: 'GovJobs',
+            description: 'Government job aggregator — find public sector opportunities across South Africa.',
+            icon: Briefcase,
+            color: '#f59e0b',
             locked: true
         }
     ]
@@ -109,7 +117,8 @@ export default function AppHub() {
                                             app.id === 'study-buddy' ? 'globe' :
                                                 app.id === 'word-quest' ? 'brain' :
                                                     app.id === 'acadamate' ? 'palette' :
-                                                        app.id === 'medibook' ? 'monitor' : 'cpu'
+                                                        app.id === 'medibook' ? 'zap' :
+                                                            app.id === 'govjobs' ? 'zap' : 'cpu'
                                 }
                                 color={app.locked ? '#475569' : app.color}
                                 size={80}
