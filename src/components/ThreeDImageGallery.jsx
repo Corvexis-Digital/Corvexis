@@ -4,15 +4,12 @@ import { PerspectiveCamera, Image as R3FImage, Text, Environment } from '@react-
 import * as THREE from 'three'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-// Get the correct base URL for assets (handles GitHub Pages /Corvexis/ prefix)
-const BASE_URL = import.meta.env.BASE_URL
-
+// Resolve image path correctly for both dev (/) and GitHub Pages (/Corvexis/)
 function resolveImage(path) {
-    // path is like "/portfolio/project-studybuddy.png"
-    // BASE_URL is "/" locally, "/Corvexis/" on GitHub Pages
-    const clean = path.startsWith('/') ? path.slice(1) : path
-    const base = BASE_URL.endsWith('/') ? BASE_URL : BASE_URL + '/'
-    return base + clean
+    const base = import.meta.env.BASE_URL || '/'
+    const cleanBase = base.endsWith('/') ? base : base + '/'
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path
+    return cleanBase + cleanPath
 }
 
 function ProjectCard({ project, index, total, radius }) {
@@ -139,12 +136,12 @@ function TubeScene({ projects }) {
 
 export default function ThreeDImageGallery({ projects }) {
     return (
-        <div style={{
-            height: '700px',
+        <div className="gallery-canvas" style={{
+            height: 'clamp(400px, 60vw, 700px)',
             width: '100%',
             position: 'relative',
-            margin: '6rem 0',
-            borderRadius: '40px',
+            margin: '4rem 0',
+            borderRadius: 'clamp(16px, 3vw, 40px)',
             overflow: 'hidden',
             background: 'rgba(0,0,0,0.2)',
             boxShadow: 'inset 0 0 100px rgba(0,0,0,0.5)',

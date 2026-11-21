@@ -5,6 +5,8 @@ import ProcessSection from '../components/ProcessSection'
 import ContactForm from '../components/ContactForm'
 import ThreeDImageGallery from '../components/ThreeDImageGallery' // Fixed casing if needed
 import TechAnimation from '../components/TechAnimation'
+import CodeCollapseHero from '../components/CodeCollapseHero'
+import IntegrationsSection from '../components/IntegrationsSection'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Video, Palette, Monitor, Laptop, Code, Cpu, Terminal, Globe, Rocket, Zap, Gamepad2, Brain } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
@@ -60,41 +62,15 @@ export default function Home() {
     ]
 
     const projects = [
-        {
-            image: "/portfolio/project-studybuddy.png",
-            title: "Study Buddy AI",
-            description: "AI-Driven Educational Platform"
-        },
-        {
-            image: "/portfolio/project-wordquest.png",
-            title: "Word Quest",
-            description: "Gamified Language Learning"
-        },
-        {
-            image: "/portfolio/project-fluffyjump.png",
-            title: "Fluffy Jump",
-            description: "Physics-Based Mobile Gaming"
-        },
-        {
-            image: "/portfolio/project-neonsnake.png",
-            title: "Neon Snake",
-            description: "Futuristic Arcade Experience"
-        },
-        {
-            image: "/portfolio/project-govjobs.png",
-            title: "GovJobs Aggregator",
-            description: "Enterprise Data Processing"
-        },
-        {
-            image: "/portfolio/project-medibook.png",
-            title: "Medibook",
-            description: "Healthcare Appointment Ecosystem"
-        },
-        {
-            image: "/portfolio/project-acadamate.png",
-            title: "Acadamate",
-            description: "Academic Performance Laboratory"
-        }
+        { image: "/portfolio/project-studybuddy.png", title: "Study Buddy AI", description: "AI-Powered Educational Platform" },
+        { image: "/portfolio/project-acadamate.png", title: "Acadamate", description: "Academic Performance Laboratory" },
+        { image: "/portfolio/project-neonsnake.png", title: "Neon Snake 3D", description: "Futuristic 3D Arcade Game" },
+        { image: "/portfolio/project-fluffyjump.png", title: "Fluffy Jump", description: "Physics-Based Mobile Game" },
+        { image: "/portfolio/project-wordquest.png", title: "Word Quest", description: "Gamified Language Learning" },
+        { image: "/portfolio/project-medibook.png", title: "Medibook", description: "Healthcare Appointment Ecosystem" },
+        { image: "/portfolio/project-govjobs.png", title: "GovJobs SA", description: "Government Jobs Aggregator" },
+        { image: "/portfolio/project1.jpg", title: "mARK Marketplace", description: "SA Ecommerce SaaS Platform" },
+        { image: "/portfolio/project2.jpg", title: "MELTDOWN Game", description: "Blender 3D Arcade Experience" },
     ]
 
     return (
@@ -145,37 +121,7 @@ export default function Home() {
             </div>
 
             {/* Hero Section */}
-            <section id="hero" style={{ padding: 0, margin: 0, overflow: 'hidden' }}>
-                <div className="hero-grid">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                    >
-                        <h1 style={{ marginBottom: '1.5rem', lineHeight: 1 }}>Revolutionizing <br />Digital <span style={{ color: 'var(--neon-purple)' }}>Excellence</span></h1>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(1rem, 2vw, 1.25rem)', maxWidth: '600px', lineHeight: '1.8' }}>
-                            At Corvexis Digital, we merge futuristic technology with artistic vision to create immersive digital experiences that redefine industry standards.
-                        </p>
-                        <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'inherit' }}>
-                            <button onClick={() => navigate('/services')}>Explore Services</button>
-                            <button onClick={() => navigate('/hub')} style={{ borderColor: 'var(--neon-purple)', color: 'var(--neon-purple)' }}>App Hub</button>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.5, delay: 0.2 }}
-                        style={{ display: 'flex', justifyContent: 'center' }}
-                    >
-                        <div className="glass hero-lottie-container">
-                            <TechAnimation type="rocket" size={180} />
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
+            <CodeCollapseHero />
 
             {/* Services Section */}
             <section id="services" style={{ background: 'var(--bg-accent)', position: 'relative' }}>
@@ -205,6 +151,91 @@ export default function Home() {
                         {services.map((service, index) => (
                             <ServiceCard key={index} {...service} />
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            <IntegrationsSection />
+
+            {/* Theme Lab teaser */}
+            <section id="themes" style={{ position: 'relative' }}>
+                <div className="content-wrapper">
+                    <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            style={{ fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', marginBottom: '1rem' }}
+                        >
+                            Five <span style={{ color: 'var(--neon-cyan)' }}>Themes</span>. One Studio.
+                        </motion.h2>
+                        <div style={{ width: '80px', height: '4px', background: 'var(--neon-cyan)', margin: '0 auto 1.5rem' }} />
+                        <p style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', lineHeight: 1.7 }}>
+                            Minimal design systems, each with its own motion language and a real 3D element. Pick a direction — we build the rest.
+                        </p>
+                    </div>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 190px), 1fr))',
+                        gap: '1rem',
+                        marginBottom: '2.5rem'
+                    }}>
+                        {[
+                            { name: 'Aurora Glass', color: '#22d3ee', motion: 'Blur-in + float' },
+                            { name: 'Monolith', color: '#ffffff', motion: 'Clip wipe' },
+                            { name: 'Solaris', color: '#f59e0b', motion: 'Slow rise' },
+                            { name: 'Obsidian Grid', color: '#34d399', motion: 'Typewriter' },
+                            { name: 'Paperlight', color: '#1d4ed8', motion: 'Paper flip' }
+                        ].map((t, i) => (
+                            <motion.div
+                                key={t.name}
+                                initial={{ opacity: 0, y: 24 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.08 }}
+                                whileHover={{ y: -6 }}
+                                onClick={() => navigate('/themes')}
+                                style={{
+                                    padding: '1.4rem',
+                                    borderRadius: '16px',
+                                    border: `1px solid ${t.color}33`,
+                                    background: `linear-gradient(155deg, ${t.color}10, rgba(255,255,255,0.02))`,
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                <div style={{
+                                    width: '34px', height: '34px', borderRadius: '10px',
+                                    background: t.color, opacity: 0.85,
+                                    boxShadow: `0 0 22px ${t.color}55`,
+                                    marginBottom: '1rem'
+                                }} />
+                                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{t.name}</div>
+                                <div style={{
+                                    fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase',
+                                    color: 'var(--text-secondary)', fontWeight: 700, marginTop: '0.4rem'
+                                }}>
+                                    {t.motion}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <motion.button
+                            whileHover={{ scale: 1.04, boxShadow: '0 0 28px rgba(6,182,212,0.35)' }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={() => navigate('/themes')}
+                            style={{
+                                padding: '0.8rem 2rem',
+                                borderRadius: '10px',
+                                border: 'none',
+                                background: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+                                color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer'
+                            }}
+                        >
+                            Open the Theme Lab →
+                        </motion.button>
                     </div>
                 </div>
             </section>

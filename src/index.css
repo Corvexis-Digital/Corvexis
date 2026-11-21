@@ -9,6 +9,8 @@
   --text-secondary: #94a3b8;
   --glass: rgba(15, 23, 42, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
+  --hero-bg: #050b16;
+  --nav-bg: rgba(5, 11, 22, 0.92);
 
   font-family: 'Space Grotesk', system-ui, sans-serif;
   line-height: 1.5;
@@ -35,6 +37,40 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background: radial-gradient(circle at top right, var(--bg-accent), var(--bg-dark));
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* Light theme needs a little extra contrast on surfaces */
+html.theme-paper body,
+html[data-theme='paper'] body {
+  background: radial-gradient(circle at top right, #ffffff, #f4f1ea);
+}
+
+html.theme-paper ::selection,
+html[data-theme='paper'] ::selection {
+  background: rgba(29, 78, 216, 0.18);
+}
+
+html.theme-paper .glass,
+html[data-theme='paper'] .glass {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 40px -24px rgba(27, 27, 31, 0.35);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Keep form controls inside their containers on small screens */
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 #root {
@@ -149,6 +185,17 @@ section {
 
 /* ─── RESPONSIVE ───────────────────────────────── */
 
+/* Fluid section padding */
+section {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 1.5rem);
+  min-height: auto;
+}
+
+/* Fluid content wrapper */
+.content-wrapper {
+  padding: 0 clamp(0.5rem, 3vw, 1rem);
+}
+
 /* Tablet & below */
 @media screen and (max-width: 900px) {
   .hero-grid {
@@ -160,6 +207,11 @@ section {
 
   .hero-lottie-container {
     display: none;
+  }
+
+  /* Services grid: 2 columns on tablet */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
@@ -186,34 +238,33 @@ section {
     display: none;
   }
 
-  .desktop-nav {
-    display: none !important;
-  }
-
-  .mobile-toggle {
-    display: block !important;
-  }
-
-  section {
-    padding: 4rem 1rem;
-    min-height: auto;
-  }
-
-  .content-wrapper > div {
+  /* services/integrations: single column */
+  .services-grid {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-    text-align: center;
+  }
+
+  /* Process section: stack vertically */
+  .process-step {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .process-step > div {
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  /* Portfolio header */
+  .portfolio-header {
+    flex-direction: column;
+    gap: 1.5rem;
   }
 }
 
 /* Small phones */
 @media screen and (max-width: 480px) {
-  .hero-grid h1 {
-    font-size: clamp(1.8rem, 7vw, 2.4rem);
-  }
-
   section {
-    padding: 3rem 0.75rem;
+    padding: clamp(2rem, 6vw, 3rem) clamp(0.75rem, 4vw, 1rem);
   }
 
   .content-wrapper {
@@ -224,16 +275,86 @@ section {
     padding: 0.6em 1.2em;
     font-size: 0.8em;
   }
+
+  h1 {
+    font-size: clamp(1.8rem, 9vw, 2.6rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 8vw, 2.4rem) !important;
+  }
+
+  /* 3D gallery: reduce height on mobile */
+  .gallery-canvas {
+    height: 400px !important;
+  }
 }
 
-/* Desktop — show nav, hide toggle */
-@media screen and (min-width: 769px) {
+/* Large screens */
+@media screen and (min-width: 1400px) {
+  .content-wrapper {
+    max-width: 1400px;
+  }
+}
+
+/* Theme Lab: stack stage on tablet & below */
+@media screen and (max-width: 980px) {
+  .theme-stage {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── HEADER / NAV BREAKPOINTS ────────────────── */
+/* Not enough room for 5 links + CTA under 1080px — use the sheet menu */
+@media screen and (max-width: 1079px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: inline-flex !important;
+  }
+}
+
+@media screen and (min-width: 1080px) {
   .desktop-nav {
     display: flex !important;
   }
 
   .mobile-toggle {
     display: none !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .site-nav {
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+  }
+}
+
+/* ─── TOUCH DEVICE OPTIMIZATIONS ─────────────── */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover-only glows on touch */
+  button:hover {
+    transform: none;
+  }
+
+  /* Increase tap target sizes */
+  button, a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ─── PRINT / REDUCED MOTION ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

@@ -45,7 +45,7 @@ export default function ServiceCard({ icon: Icon, title, description, delay = 0 
 
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <Icon size={40} color="var(--neon-cyan)" strokeWidth={1.5} />
-                <h3 style={{ marginTop: '1.5rem', fontSize: '1.5rem', color: '#fff' }}>{title}</h3>
+                <h3 style={{ marginTop: '1.5rem', fontSize: '1.5rem', color: 'var(--text-primary)' }}>{title}</h3>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '1rem', lineHeight: '1.6' }}>
                     {description}
                 </p>

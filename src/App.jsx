@@ -6,6 +6,9 @@ import CustomCursor from './components/CustomCursor'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import AppHub from './pages/AppHub'
+import Projects from './pages/Projects'
+import Themes from './pages/Themes'
+import { ThemeProvider } from './context/ThemeContext'
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -16,6 +19,8 @@ function AnimatedRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/hub" element={<AppHub />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/themes" element={<Themes />} />
       </Routes>
     </AnimatePresence>
   )
@@ -23,33 +28,35 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <Router>
-      <main style={{ position: 'relative', minHeight: '100vh', background: 'var(--bg-dark)' }}>
-        <CustomCursor />
-        <Navbar />
+    <ThemeProvider>
+      <Router>
+        <main style={{ position: 'relative', minHeight: '100vh', background: 'var(--bg-dark)', transition: 'background 0.4s ease' }}>
+          <CustomCursor />
+          <Navbar />
 
-        <AnimatedRoutes />
+          <AnimatedRoutes />
 
-        <footer style={{ padding: '4rem 2rem', textAlign: 'center', borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)', marginTop: 'auto' }}>
-          <div className="content-wrapper" style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '2rem'
-          }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'Outfit', color: 'var(--text-primary)' }}>
-              CORVEXIS <span style={{ color: 'var(--neon-cyan)' }}>DIGITAL</span>
+          <footer style={{ padding: '4rem 2rem', textAlign: 'center', borderTop: '1px solid var(--glass-border)', background: 'var(--bg-dark)', marginTop: 'auto', transition: 'background 0.4s ease' }}>
+            <div className="content-wrapper" style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '2rem'
+            }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'Outfit', color: 'var(--text-primary)' }}>
+                CORVEXIS <span style={{ color: 'var(--neon-cyan)' }}>DIGITAL</span>
+              </div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>&copy; 2026 Corvexis Digital. ALL SYSTEMS OPERATIONAL.</p>
+              <div style={{ display: 'flex', gap: '2rem' }}>
+                <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy</a>
+                <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms</a>
+              </div>
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>&copy; 2026 Corvexis Digital. ALL SYSTEMS OPERATIONAL.</p>
-            <div style={{ display: 'flex', gap: '2rem' }}>
-              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy</a>
-              <a href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms</a>
-            </div>
-          </div>
-        </footer>
-      </main>
-    </Router>
+          </footer>
+        </main>
+      </Router>
+    </ThemeProvider>
   )
 }
 
